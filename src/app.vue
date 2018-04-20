@@ -20,6 +20,7 @@ import AppFooter from './components/footer/AppFooter.vue'
 import AppHeader from './components/header/AppHeader.vue'
 import BackTop from './components/back-top/BackTop.vue'
 import Card from './components/card/Card.vue'
+import annyang from 'annyang'
 
 export default {
   name: 'App',
@@ -88,6 +89,17 @@ export default {
     }
   },
   mounted () {
+    const commands = {
+      'search *artist': artist => {
+        this.search.band = artist
+        console.log("artist", artist);
+      }
+    }
+
+    annyang.addCommands(commands)
+
+    annyang.start()
+
     this.$nextTick(() => {
       this.$route.query.q && (this.search.band = this.$route.query.q)
       this.$route.query.origin && (this.search.origin = this.$route.query.origin)

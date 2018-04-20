@@ -29,6 +29,7 @@ const router = new VueRouter({
   ]
 })
 
+
 router.beforeEach((to, from, next) => {
   const hasQueryParams = route => {
     return Boolean(Object.keys(route.query).length)
