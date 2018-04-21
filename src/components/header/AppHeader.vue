@@ -21,7 +21,15 @@
 
       <p><a href="https://github.com/tiagoporto/svg-music-logos/issues" class="link">Request a new logo or report a problem.</a></p>
 
-      <input type="search" v-model.trim="search.band" placeholder="Search" class="search" autofocus/>
+      <form>
+        <input type="search" v-model.trim="search.artist" placeholder="Search" class="search" autofocus/>
+
+        <button type="button">
+          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' >
+            <path d='M16,21.625c2.682,0,4.875-2.25,4.875-5V6.375c0-2.75-2.193-5-4.875-5c-2.682,0-4.875,2.25-4.875,5v10.25  C11.125,19.375,13.318,21.625,16,21.625z M21.876,11.5v5.125c0,3.309-2.636,6-5.876,6s-5.875-2.691-5.875-6V11.5H7.126v5.125  c0,4.443,3.194,8.132,7.372,8.861v2.139h-3.372v3h9.749v-3h-3.376v-2.139c4.181-0.729,7.375-4.418,7.375-8.861V11.5H21.876z' />
+          </svg>
+        </button>
+      </form>
 
       <div class="filter">
         <select v-model="search.origin" class="select">
@@ -42,6 +50,7 @@
 import './AppHeader.styl'
 import './Jumbotron.styl'
 import _ from 'lodash'
+import annyang from 'annyang'
 
 const setJumbotronHeight = () => {
   if (window.innerWidth > 768) {
@@ -65,6 +74,36 @@ export default {
     genres: [Array],
     search: [Object],
     logos: [Array]
+  },
+  mounted () {
+    const commands = {
+      'search *artist': param => {
+        this.search.artist = param
+      },
+      'clean search': () => {
+        this.search.artist = ''
+        this.search.origin = ''
+        this.search.genre = ''
+      },
+      'filter by *filter': filter => {
+        const param = filter.replace(/(?:^|\s)\s/g, a => a.touppercase())
+
+        if (this.genres.includes(param)) {
+          this.search.genre = param
+        } else if (this.origins.includes(param)) {
+          this.search.origin = param
+        }
+      },
+      'clean filters': () => {
+        this.search.origin = ''
+        this.search.genre = ''
+      }
+    }
+
+    annyang.addCommands(commands)
+
+    annyang.start()
   }
 }
+
 </script>

@@ -20,7 +20,6 @@ import AppFooter from './components/footer/AppFooter.vue'
 import AppHeader from './components/header/AppHeader.vue'
 import BackTop from './components/back-top/BackTop.vue'
 import Card from './components/card/Card.vue'
-import annyang from 'annyang'
 
 export default {
   name: 'App',
@@ -37,7 +36,7 @@ export default {
       genres,
       origins,
       search: {
-        band: '',
+        artist: '',
         genre: '',
         origin: ''
       }
@@ -47,7 +46,7 @@ export default {
     filteredLogos () {
       const query = {}
 
-      this.search.band && (query.q = this.search.band)
+      this.search.artist && (query.q = this.search.artist)
       this.search.genre && (query.genre = this.search.genre)
       this.search.origin && (query.origin = this.search.origin)
 
@@ -78,30 +77,19 @@ export default {
 
       const context = this
 
-      return context.logos.filter(band => {
+      return context.logos.filter(artist => {
         const searched = context.search
-        const name = band.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(searched.band.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
-        const genre = (!searched.genre && !band.genre) || (!searched.genre || (band.genre && band.genre.includes(searched.genre)))
-        const origin = (!searched.origin && !band.origin) || (!searched.origin || (band.origin && band.origin.includes(searched.origin)))
+        const name = artist.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(searched.artist.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
+        const genre = (!searched.genre && !artist.genre) || (!searched.genre || (artist.genre && artist.genre.includes(searched.genre)))
+        const origin = (!searched.origin && !artist.origin) || (!searched.origin || (artist.origin && artist.origin.includes(searched.origin)))
 
         return name && origin && genre
       })
     }
   },
   mounted () {
-    const commands = {
-      'search *artist': artist => {
-        this.search.band = artist
-        console.log("artist", artist);
-      }
-    }
-
-    annyang.addCommands(commands)
-
-    annyang.start()
-
     this.$nextTick(() => {
-      this.$route.query.q && (this.search.band = this.$route.query.q)
+      this.$route.query.q && (this.search.artist = this.$route.query.q)
       this.$route.query.origin && (this.search.origin = this.$route.query.origin)
       this.$route.query.genre && (this.search.genre = this.$route.query.genre)
 
