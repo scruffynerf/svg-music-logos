@@ -50,10 +50,19 @@ export default {
       this.search.genre && (query.genre = this.search.genre)
       this.search.origin && (query.origin = this.search.origin)
 
-      if (this.search.band || this.search.genre || this.search.origin) {
+      if (this.search.artist || this.search.genre || this.search.origin) {
         this.$router.replace({
           name: 'search',
           query
+        })
+      } else {
+        this.$router.replace({
+          name: 'home',
+          query: {
+            q: undefined,
+            genre: undefined,
+            origin: undefined
+          }
         })
       }
 
