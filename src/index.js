@@ -1,6 +1,7 @@
 import './styles/index.js'
 import App from './App.vue'
 import FlagIcon from 'vue-flag-icon'
+import {registerServiceWorker} from './serviceWorker.js'
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import VueRouter from 'vue-router'
@@ -47,6 +48,7 @@ const app = new Vue({
 })
 
 app.$mount('#svgMusicLogosApp')
+registerServiceWorker()
 
 if (process.env.NODE_ENV === 'production') {
   Vue.use(VueAnalytics, {
