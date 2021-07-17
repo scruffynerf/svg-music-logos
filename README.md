@@ -4,7 +4,7 @@ LIKED ? Leave a <a href="https://github.com/tiagoporto/svg-music-logos/stargazer
 
 <div align="center">
 
-![SVG Music Logos](./logo.svg)
+[![SVG Music Logos](./logo.svg)](https://tiagoporto.github.io/svg-music-logos/)
 
 <!-- replace start -->
 
@@ -17,9 +17,9 @@ LIKED ? Leave a <a href="https://github.com/tiagoporto/svg-music-logos/stargazer
 
 [![YouTube Music](https://img.shields.io/badge/youtube%20music-playlist-555?style=for-the-badge&logo=youtube-music&labelColor=FF0000)](https://music.youtube.com/playlist?list=PLKtV93YW2_X-Iu_iNpyMG03bWx8YTTAx6&feature=share)
 
-</div>
-
 A collection of logos and symbols from bands, musicians and related in SVG.
+
+</div>
 
 ## 🎧 Project Info
 

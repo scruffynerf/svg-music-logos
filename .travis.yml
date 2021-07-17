@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - lts/*
+
+os:
+  - linux
+dist: focal
+
+# branches:
+#   only:
+#     - main
+#     - master
+
+cache: npm
+
+stages:
+  - Checks
+
+jobs:
+  include:
+    - stage: Checks
+    - script: npm run check-links
+      name: Check Doc links
+
+    - script: npm run check-urls
+      name: Check Doc URLs
